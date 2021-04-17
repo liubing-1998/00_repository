@@ -1,0 +1,339 @@
+%
+% ---------------------------------------------------------------
+% Copyright (C) 2012-2018 Gang Li
+% ---------------------------------------------------------------
+%
+% This work is the default powerdot-tuliplab style test file and may be
+% distributed and/or modified under the conditions of the LaTeX Project Public
+% License, either version 1.3 of this license or (at your option) any later
+% version. The latest version of this license is in
+% http://www.latex-project.org/lppl.txt and version 1.3 or later is part of all
+% distributions of LaTeX version 2003/12/01 or later.
+%
+% This work has the LPPL maintenance status "maintained".
+%
+% This Current Maintainer of this work is Gang Li.
+%
+%
+
+\documentclass[
+ size=14pt,
+ paper=smartboard,  %a4paper, smartboard, screen
+ mode=present, 		%present, handout, print
+ display=slides, 	% slidesnotes, notes, slides
+ style=tuliplab,  	% TULIP Lab style
+ pauseslide,
+ fleqn,leqno]{powerdot}
+
+
+%我自己增加的两端对其用
+\usepackage{ragged2e}
+\renewcommand{\raggedright}{\leftskip=0pt \rightskip=0pt plus 0cm}
+
+
+\usepackage{cancel}
+\usepackage{caption}
+\usepackage{stackengine}
+\usepackage{smartdiagram}
+\usepackage{attrib}
+\usepackage{amssymb}
+\usepackage{amsmath} 
+\usepackage{amsthm} 
+\usepackage{mathtools}
+\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{boxedminipage}
+\usepackage{rotate}
+\usepackage{calc}
+\usepackage[absolute]{textpos}
+\usepackage{psfrag,overpic}
+\usepackage{fouriernc}
+\usepackage{pstricks,pst-3d,pst-grad,pstricks-add,pst-text,pst-node,pst-tree}
+\usepackage{moreverb,epsfig,subfigure}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{etex}
+\usepackage{breqn}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{bibentry}
+\usepackage{gitinfo2}
+\usepackage{siunitx}
+\usepackage{nicefrac}
+%\usepackage{geometry}
+%\geometry{verbose,letterpaper}
+\usepackage{media9}
+\usepackage{animate}
+%\usepackage{movie15}
+\usepackage{auto-pst-pdf}
+
+%\usepackage{breakurl}
+\usepackage{fontawesome}
+\usepackage{xcolor}
+\usepackage{multicol}
+
+
+
+\usepackage{verbatim}
+\usepackage[utf8]{inputenc}
+\usepackage{dtk-logos}
+\usepackage{tikz}
+\usepackage{adigraph}
+%\usepackage{tkz-graph}
+\usepackage{hyperref}
+%\usepackage{ulem}
+\usepackage{pgfplots}
+\usepackage{verbatim}
+\usepackage{fontawesome}
+
+
+\usepackage{todonotes}
+% \usepackage{pst-rel-points}
+\usepackage{animate}
+\usepackage{fontawesome}
+
+\usepackage{listings}
+\lstset{frameround=fttt,
+frame=trBL,
+stringstyle=\ttfamily,
+backgroundcolor=\color{yellow!20},
+basicstyle=\footnotesize\ttfamily}
+\lstnewenvironment{code}{
+\lstset{frame=single,escapeinside=`',
+backgroundcolor=\color{yellow!20},
+basicstyle=\footnotesize\ttfamily}
+}{}
+
+
+\usepackage{hyperref}
+\hypersetup{ % TODO: PDF meta Data
+  pdftitle={Kaggle sildes},
+  pdfauthor={Bing Liu},
+  pdfpagemode={FullScreen},
+  pdfborder={0 0 0}
+}
+
+
+% \usepackage{auto-pst-pdf}
+% package to show source code
+
+\definecolor{LightGray}{rgb}{0.9,0.9,0.9}
+\newlength{\pixel}\setlength\pixel{0.000714285714\slidewidth}
+\setlength{\TPHorizModule}{\slidewidth}
+\setlength{\TPVertModule}{\slideheight}
+\newcommand\highlight[1]{\fbox{#1}}
+\newcommand\icite[1]{{\footnotesize [#1]}}
+
+\newcommand\twotonebox[2]{\fcolorbox{pdcolor2}{pdcolor2}
+{#1\vphantom{#2}}\fcolorbox{pdcolor2}{white}{#2\vphantom{#1}}}
+\newcommand\twotoneboxo[2]{\fcolorbox{pdcolor2}{pdcolor2}
+{#1}\fcolorbox{pdcolor2}{white}{#2}}
+\newcommand\vpspace[1]{\vphantom{\vspace{#1}}}
+\newcommand\hpspace[1]{\hphantom{\hspace{#1}}}
+\newcommand\COMMENT[1]{}
+
+\newcommand\placepos[3]{\hbox to\z@{\kern#1
+        \raisebox{-#2}[\z@][\z@]{#3}\hss}\ignorespaces}
+
+\renewcommand{\baselinestretch}{1.2}
+
+
+\newcommand{\draftnote}[3]{
+	\todo[author=#2,color=#1!30,size=\footnotesize]{\textsf{#3}}	}
+% TODO: add yourself here:
+%
+\newcommand{\gangli}[1]{\draftnote{blue}{GLi:}{#1}}
+\newcommand{\shaoni}[1]{\draftnote{green}{sn:}{#1}}
+\newcommand{\gliMarker}
+	{\todo[author=GLi,size=\tiny,inline,color=blue!40]
+	{Gang Li has worked up to here.}}
+\newcommand{\snMarker}
+	{\todo[author=Sn,size=\tiny,inline,color=green!40]
+	{Shaoni has worked up to here.}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% title
+% TODO: Customize to your Own Title, Name, Address
+%
+\title{Shopee - Price Match Guarantee}
+\author{
+Bing Liu
+\\
+\\Jilin University
+\\College of Computer Science and Technology
+}
+\date{\gitCommitterDate}
+%\date{\today} %暂时手写改动
+
+% Customize the setting of slides
+\pdsetup{
+% TODO: Customize the left footer, and right footer
+rf=\href{http://www.tulip.org.au}{
+Last Changed by: \textsc{\gitCommitterName}\ \gitVtagn-\gitAbbrevHash\ (\gitAuthorDate)
+%Last Changed by: \textsc{Bing Liu}\ \gitVtagn-\gitAbbrevHash\ (\today)
+},
+cf={flip00-kaggle},
+}
+
+
+\begin{document}
+
+\maketitle
+
+%\begin{slide}{Overview}
+%\tableofcontents[content=sections]
+%\end{slide}
+
+
+%%==========================================================================================
+%%
+\begin{slide}[toc=,bm=]{Overview}
+\tableofcontents[content=currentsection,type=1]
+\end{slide}
+%%
+%%==========================================================================================
+
+
+\section{Overview of this competition}
+
+%%==========================================================================================
+%%
+\begin{slide}{Problem background}
+
+\begin{itemize}
+\item This problem is an active competition, which prize money is \$30000. %So it is a little difficult for us.
+
+\bigskip
+
+\item The competition purpose is to determine if two products are the same by their images.
+\end{itemize}
+
+\end{slide}
+%%
+%%==========================================================================================
+
+%%==========================================================================================
+%%
+\begin{slide}{Problem description}
+
+\raggedright
+
+Retail companies use a variety of methods to assure customers that their products are the cheapest. Among them is product matching, which allows a company to offer products at rates that are competitive to the same product sold by another retailer. To perform these matches automatically requires a thorough machine learning approach, this is the mainly problem we need to solution!
+\bigskip
+Two different images of similar wares may represent the same product or two completely different items. Retailers want to avoid misrepresentations and other issues that could come from conflating two dissimilar products. Currently, a combination of deep learning and traditional machine learning analyzes image and text information to compare similarity. But major differences in images, titles, and product descriptions prevent these methods from being entirely effective.
+\bigskip
+In this competition, we’ll apply our machine learning skills to build a model that predicts which items are the same products.
+\end{slide}
+%%
+%%==========================================================================================
+
+
+
+\section{Data}
+
+%%==========================================================================================
+%%
+\begin{slide}{Data description}
+
+Task is to identify which products have been posted repeatedly. The differences between related products may be subtle while photos of identical products may be wildly different!
+\bigskip
+only the first few rows or images of the test set are published; the remainder are only available to your notebook when it is submitted. Expect to find roughly 70,000 images in the hidden test set. The few test rows and images that are provided are intended to illustrate the hidden test set format and folder structure.
+
+\end{slide}
+%%
+%%==========================================================================================
+
+%%==========================================================================================
+%%
+\begin{slide}{Files}
+
+\begin{itemize}
+\item train/test.csv - the training set metadata. Each row contains the data for a single posting. Multiple postings might have the exact same image ID, but with different titles or vice versa.
+\begin{itemize}
+\item posting\_id - the ID code for the posting.
+\item image - the image id/md5sum.
+\item image\_phash - a perceptual hash of the image.
+\item title - the product description for the posting.
+\item label\_group - ID code for all postings that map to the same product. Not provided for the test set.
+\end{itemize}
+\item train/test images - the images associated with the postings.
+\item sample\_submission.csv - a sample submission file in the correct format.
+\begin{itemize}
+\item posting\_id - the ID code for the posting.
+\item matches - Space delimited list of all posting IDs that match this posting. Posts always selfmatch. Group sizes were capped at 50, so there is no need to predict more than 50 matches.
+\end{itemize}
+\end{itemize}
+\end{slide}
+%%
+%%==========================================================================================
+
+\section{Algorithm}
+%\begin{slide}{Algorithm one}
+%\includegraphics*[scale=0.2]{1.png}
+%\end{slide}
+\begin{slide}[toc=,bm=]{Algorithm}
+	\begin{center}
+		\begin{figure}[htbp]
+			\includegraphics[scale=0.2]{./figure/model.eps}
+			\caption{model}
+		\end{figure}
+	\end{center}
+\end{slide}
+
+\section{Conclusion}
+%%==========================================================================================
+%%
+\begin{slide}[toc=,bm=]{Conclusion}
+	\begin{center}
+		\begin{figure}[htbp]
+			\includegraphics[scale=0.7]{./figure/result.eps}
+			\caption{result}
+		\end{figure}
+	\end{center}
+\end{slide}
+%\begin{slide}{Result}
+%	\includegraphics*[scale=0.7]{result.png}
+%\end{slide}
+
+\begin{slide}[toc=,bm=]{Conclusion}
+
+In the first algorithm, although the CV score for baseline is 0.6528, we only use the image information to match the products whether they are belong to the same product. 
+\bigskip
+In the next week, we will try to add the image\_phash and title information to our model to imporve score.
+
+\end{slide}
+%%
+%%==========================================================================================
+
+
+%%==========================================================================================
+% TODO: Contact Page
+\begin{wideslide}[toc=,bm=]{Contact Information}
+\centering
+\vspace{\stretch{1}}
+\twocolumn[
+lcolwidth=0.35\linewidth,
+rcolwidth=0.65\linewidth
+]
+{
+% \centerline{\includegraphics[scale=.2]{tulip-logo.eps}}
+}
+{
+\vspace{\stretch{1}}
+Bing Liu\\
+College of Computer Science and Technology\\
+Jilin University, China
+\begin{description}
+ \item[\textcolor{orange}{\faEnvelope}] \href{mailto:bliu@tulip.academy}
+ {\textsc{\footnotesize{bliu@tulip.academy}}}
+
+ \item[\textcolor{orange}{\faHome}] \href{http://www.tulip.org.au}
+ {\textsc{\footnotesize{Team for Universal Learning and Intelligent Processing}}}
+\end{description}
+}
+\vspace{\stretch{1}}
+\end{wideslide}
+
+\end{document}
+
+\endinput
