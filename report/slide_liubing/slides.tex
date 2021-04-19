@@ -107,7 +107,7 @@ basicstyle=\footnotesize\ttfamily}
 
 \usepackage{hyperref}
 \hypersetup{ % TODO: PDF meta Data
-  pdftitle={Kaggle sildes},
+  pdftitle={Kaggle Bike-sharing-demand sildes},
   pdfauthor={Bing Liu},
   pdfpagemode={FullScreen},
   pdfborder={0 0 0}
@@ -155,7 +155,7 @@ basicstyle=\footnotesize\ttfamily}
 % title
 % TODO: Customize to your Own Title, Name, Address
 %
-\title{Shopee - Price Match Guarantee}
+\title{Bike Sharing Demand}
 \author{
 Bing Liu
 \\
@@ -172,7 +172,7 @@ rf=\href{http://www.tulip.org.au}{
 Last Changed by: \textsc{\gitCommitterName}\ \gitVtagn-\gitAbbrevHash\ (\gitAuthorDate)
 %Last Changed by: \textsc{Bing Liu}\ \gitVtagn-\gitAbbrevHash\ (\today)
 },
-cf={flip00-kaggle},
+cf={Flip00-Kaggle-Presentation},
 }
 
 
@@ -187,25 +187,32 @@ cf={flip00-kaggle},
 
 %%==========================================================================================
 %%
-\begin{slide}[toc=,bm=]{Overview}
+\begin{slide}[toc=,bm=]{Table Of Content}
 \tableofcontents[content=currentsection,type=1]
 \end{slide}
 %%
 %%==========================================================================================
 
 
-\section{Overview of this competition}
+\section{Overview}
 
 %%==========================================================================================
 %%
-\begin{slide}{Problem background}
+\begin{slide}{Description and Evaluation}
 
 \begin{itemize}
-\item This problem is an active competition, which prize money is \$30000. %So it is a little difficult for us.
+\item \textbf{Description}
+
+\medskip    %\smallskip \medskip
+In this competition, participants are asked to combine historical usage patterns with weather data in order to forecast bike rental demand in the Capital Bikeshare program in Washington, D.C.
 
 \bigskip
+\bigskip
+\item \textbf{Evaluation}
 
-\item The competition purpose is to determine if two products are the same by their images.
+\medskip
+Submissions are evaluated one the Root Mean Squared Logarithmic Error . 
+
 \end{itemize}
 
 \end{slide}
@@ -214,16 +221,9 @@ cf={flip00-kaggle},
 
 %%==========================================================================================
 %%
-\begin{slide}{Problem description}
-
-\raggedright
-
-Retail companies use a variety of methods to assure customers that their products are the cheapest. Among them is product matching, which allows a company to offer products at rates that are competitive to the same product sold by another retailer. To perform these matches automatically requires a thorough machine learning approach, this is the mainly problem we need to solution!
-\bigskip
-Two different images of similar wares may represent the same product or two completely different items. Retailers want to avoid misrepresentations and other issues that could come from conflating two dissimilar products. Currently, a combination of deep learning and traditional machine learning analyzes image and text information to compare similarity. But major differences in images, titles, and product descriptions prevent these methods from being entirely effective.
-\bigskip
-In this competition, we’ll apply our machine learning skills to build a model that predicts which items are the same products.
-\end{slide}
+%\begin{slide}{Data}
+%\raggedright
+%\end{slide}
 %%
 %%==========================================================================================
 
@@ -233,11 +233,28 @@ In this competition, we’ll apply our machine learning skills to build a model 
 
 %%==========================================================================================
 %%
-\begin{slide}{Data description}
+\begin{slide}{Data Description and Explorer}
 
-Task is to identify which products have been posted repeatedly. The differences between related products may be subtle while photos of identical products may be wildly different!
-\bigskip
-only the first few rows or images of the test set are published; the remainder are only available to your notebook when it is submitted. Expect to find roughly 70,000 images in the hidden test set. The few test rows and images that are provided are intended to illustrate the hidden test set format and folder structure.
+\begin{itemize}
+	\item \textbf{Data Description}
+	
+	\medskip
+	The competition provide hourly rental data spanning two years.the training set is comprised of the first 19 days of each month, while the test set is the 20th to the end of the month.
+	The taskis to predict the total count of bikes rented during each hour covered by the test set, using only information available prior to the rental period.
+	
+	\bigskip
+	\item \textbf{Data Explorer}
+	
+	\begin{itemize}
+		\smallskip
+		\item \textbf{train.csv} -- it contains 10886 rows and 12 columns. Each row represents bike rental data for a certain hour. Each column indicates the current conditions
+		\smallskip
+		\item \textbf{test.csv} -- it contains 6493 rows and 9 columns. Compared with the train data, there are fewer "casual","registered" and "count" columns.
+		\smallskip
+		\item \textbf{sampleSubmission.csv} -- it clarifies the data submission format. It just contains 2 columns that is "datetime" and "count".
+	\end{itemize}
+	
+\end{itemize}
 
 \end{slide}
 %%
@@ -245,62 +262,138 @@ only the first few rows or images of the test set are published; the remainder a
 
 %%==========================================================================================
 %%
-\begin{slide}{Files}
+\begin{slide}{Data Fields}
+\begin{center}
+	\begin{tabular}{c| c c c c }
+		\toprule
+		\textbf{column} & \textbf{description}  \\
+		\midrule
+		$datetime$ &  {hourly date + timestamp }\\
+		$season$ &  {1 = spring, 2 = summer, 3 = fall, 4 = winter} \\
+		$holiday$ &  {whether the day is considered a holiday} \\
+		$workingday$ &  {whether the day is neither a weekend nor holiday} \\
+		$weather$ &  {1=clear, 2=mist + cloudy, 3=light snow, 4=heavy rain} \\
+		$temp$ & {temperature in Celsius} \\
+		$atemp$ & {"feels like" temperature in Celsius} \\
+		$humidity$ & {relative humidity} \\
+		$windspeed$ & {wind speed} \\
+		$casual$ & {number of non-registered user rentals initiated} \\
+		$registered$ & {number of registered user rentals initiated} \\
+		$count$ & {number of total rentals} \\
+		\bottomrule
+	\end{tabular}
+\end{center}
+\end{slide}
+%%
+%%==========================================================================================	
 
-\begin{itemize}
-\item train/test.csv - the training set metadata. Each row contains the data for a single posting. Multiple postings might have the exact same image ID, but with different titles or vice versa.
-\begin{itemize}
-\item posting\_id - the ID code for the posting.
-\item image - the image id/md5sum.
-\item image\_phash - a perceptual hash of the image.
-\item title - the product description for the posting.
-\item label\_group - ID code for all postings that map to the same product. Not provided for the test set.
-\end{itemize}
-\item train/test images - the images associated with the postings.
-\item sample\_submission.csv - a sample submission file in the correct format.
-\begin{itemize}
-\item posting\_id - the ID code for the posting.
-\item matches - Space delimited list of all posting IDs that match this posting. Posts always selfmatch. Group sizes were capped at 50, so there is no need to predict more than 50 matches.
-\end{itemize}
-\end{itemize}
+%%==========================================================================================
+%%
+\begin{slide}{Missing Values Analysis}
+I use "missingno" to visualize missing value in the dataset, Luckily the dataset do not has any missing value.
+\begin{figure}[htbp]
+	\includegraphics[scale=0.4]{./figure/Figure_1.eps}
+	\caption{Missing values analysis}
+\end{figure}
+\end{slide}
+%%
+%%==========================================================================================	
+
+%%==========================================================================================
+%%
+\begin{slide}{Outliers Analysis}
+1:Spring season has got relatively lower count. \\
+2:The boxplot with "Hour Of The Day" is quiet interesting.The median value are relatively higher at 7AM to 8AM and 5PM to 6PM.\\
+3:Most of the outlier points are mainly contributed from "Working Day" than "Non Working Day". 
+\begin{figure}[htbp]
+	\includegraphics[scale=0.3]{./figure/Figure_2.eps}
+	\caption{Missing values analysis}
+\end{figure}
+\end{slide}
+%%
+%%==========================================================================================	
+
+%%==========================================================================================
+%%
+\begin{slide}{Correlation Analysis}
+	1:temp and humidity features has got positive and negative correlation with count respectively. the count variable has got little dependency on "temp" and "humidity". \\
+	2:"Casual" and "Registered" are also not taken into account since they are leakage variables in nature and need to dropped during model building. \\
+	3:windspeed is not gonna be really useful numerical feature.
+	\begin{figure}[htbp]
+		\includegraphics[scale=0.4]{./figure/Figure_3.eps}
+		\caption{Correlation Analysis I}
+	\end{figure}
+\end{slide}
+%%
+%%==========================================================================================	
+
+%%==========================================================================================
+%%
+\begin{slide}{}
+	Regression plot in seaborn is one useful way to depict the relationship between two features. Here we consider "count" vs "temp", "humidity", "windspeed".
+	\begin{figure}[htbp]
+		\includegraphics[scale=0.6]{./figure/Figure_4.eps}
+		\caption{Correlation Analysis II}
+	\end{figure}
+\end{slide}
+%%
+%%==========================================================================================	
+
+%%==========================================================================================
+%%
+\begin{slide}{Visualizing Distribution Of Data}
+	 It is desirable to have Normal distribution as most of the machine learning techniques require dependent variable to be Normal. One possible solution is to take log transformation on "count" variable after removing outlier data points.
+	\begin{figure}[htbp]
+		\includegraphics[scale=0.4]{./figure/Figure_5.eps}
+		\caption{Visualizing Distribution Of Data}
+	\end{figure}
+\end{slide}
+%%
+%%==========================================================================================	
+
+%%==========================================================================================
+%%
+\begin{slide}{Visualizing Count}
+	1:It is quiet obvious that people tend to rent bike during summer season. Therefore June, July and August has got relatively higher demand for bicycle.\\
+	2:On weekdays more people tend to rent bicycle around 7AM-8AM and 5PM-6PM. 
+	\begin{figure}[htbp]
+		\includegraphics[scale=0.4]{./figure/Figure_6.eps}
+		\caption{Visualizing Count I}
+	\end{figure}
+\end{slide}
+%%
+%%==========================================================================================	
+%%==========================================================================================
+%%
+\begin{slide}{}
+	1:On "Saturday" and "Sunday".More people tend to rent bicycle between 10AM and 4PM.\\
+	2:Registered user contribute the peak around 7AM-8AM and 5PM-6PM.
+	\begin{figure}[htbp]
+		\includegraphics[scale=0.4]{./figure/Figure_7.eps}
+		\caption{Visualizing Count II}
+	\end{figure}
 \end{slide}
 %%
 %%==========================================================================================
 
-\section{Algorithm}
+\section{Feature Engineering and Model}
 %\begin{slide}{Algorithm one}
 %\includegraphics*[scale=0.2]{1.png}
 %\end{slide}
-\begin{slide}[toc=,bm=]{Algorithm}
-	\begin{center}
-		\begin{figure}[htbp]
-			\includegraphics[scale=0.2]{./figure/model.eps}
-			\caption{model}
-		\end{figure}
-	\end{center}
+%%==========================================================================================
+%%
+\begin{slide}[toc=,bm=]{Model}
+	I have choose the Ensemble Model - Gradient Boost. Compare the distribution of train and test results.It confirms visually that the model has not predicted really bad and not suffering from major overfitting problem.
+	\begin{figure}[htbp]
+	\includegraphics[scale=0.5]{./figure/models_Figure_1.eps}
+	\caption{Distribution of train and test results}
+	\end{figure}
 \end{slide}
 
 \section{Conclusion}
 %%==========================================================================================
-%%
 \begin{slide}[toc=,bm=]{Conclusion}
-	\begin{center}
-		\begin{figure}[htbp]
-			\includegraphics[scale=0.7]{./figure/result.eps}
-			\caption{result}
-		\end{figure}
-	\end{center}
-\end{slide}
-%\begin{slide}{Result}
-%	\includegraphics*[scale=0.7]{result.png}
-%\end{slide}
-
-\begin{slide}[toc=,bm=]{Conclusion}
-
-In the first algorithm, although the CV score for baseline is 0.6528, we only use the image information to match the products whether they are belong to the same product. 
-\bigskip
-In the next week, we will try to add the image\_phash and title information to our model to imporve score.
-
+RMSLE Value For Gradient Boost:  0.189973542608
 \end{slide}
 %%
 %%==========================================================================================
