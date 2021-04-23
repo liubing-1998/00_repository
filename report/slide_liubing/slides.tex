@@ -381,7 +381,28 @@ I use "missingno" to visualize missing value in the dataset, Luckily the dataset
 %\includegraphics*[scale=0.2]{1.png}
 %\end{slide}
 %%==========================================================================================
+\begin{slide}[toc=,bm=]{Feature Processing}
+	Split the given date into "date, hour, year, weekday, month".
+	\begin{figure}[htbp]
+		\includegraphics[scale=0.8]{./figure/1.eps}
+		\caption{Time feature processing}
+	\end{figure}
+	According to visual analysis, select features that have strong correlation with count.
+	\begin{figure}[htbp]
+		\includegraphics[scale=0.75]{./figure/2.eps}
+		\caption{Feature selection}
+	\end{figure}
+\end{slide}
 %%
+\begin{slide}[toc=,bm=]{Splitting train and test date}
+	Divide train set and test set according to whether there is count attribute.
+	\begin{figure}[htbp]
+		\includegraphics[scale=1]{./figure/3.eps}
+		\caption{Training set and test set division}
+	\end{figure}
+\end{slide}
+%%
+
 \begin{slide}[toc=,bm=]{Model}
 	I have choose the Ensemble Model - Gradient Boost. Compare the distribution of train and test results.It confirms visually that the model has not predicted really bad and not suffering from major overfitting problem.
 	\begin{figure}[htbp]
@@ -393,7 +414,15 @@ I use "missingno" to visualize missing value in the dataset, Luckily the dataset
 \section{Conclusion}
 %%==========================================================================================
 \begin{slide}[toc=,bm=]{Conclusion}
-RMSLE Value For Gradient Boost:  0.189973542608
+Using RMSLE to calculate the error, it penalizes under-prediction even more.\\
+RMSLE Value For Gradient Boost:  0.189973542608\\
+The score of my submission in kaggle is 0.41867. Ranked 428 among 3242 teams.\\
+\begin{figure}[htbp]
+	\includegraphics[scale=0.8]{./figure/428-3242.eps}
+	\caption{The score of my submission}
+\end{figure}
+
+
 \end{slide}
 %%
 %%==========================================================================================
