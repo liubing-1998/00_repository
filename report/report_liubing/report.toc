@@ -15,4 +15,3 @@
 \contentsline {subsection}{\tocsubsection {}{3.2}{Splitting train and test date}}{5}{subsection.3.2}%
 \contentsline {subsection}{\tocsubsection {}{3.3}{Model}}{5}{subsection.3.3}%
 \contentsline {section}{\tocsection {}{4}{Conclusions}}{5}{section.4}%
-\contentsline {section}{\tocsection {}{}{References}}{7}{section*.13}%

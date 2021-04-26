@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=latex 2021.4.17)  26 APR 2021 13:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=latex 2021.4.17)  26 APR 2021 14:37
 entering extended mode
  restricted \write18 enabled.
  Source specials enabled.
@@ -1377,24 +1377,24 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- (./abstract.tex)
-(./report.toc)
+ (./report.toc)
 \tf@toc=\write7
 \openout7 = `report.toc'.
 
- [1] (./mainbody.tex
-Overfull \hbox (3.22005pt too wide) in paragraph at lines 5--6
+
+[1]
+Overfull \hbox (3.22005pt too wide) in paragraph at lines 60--61
  \OT1/cmr/m/n/10 1.1.\OT1/cmr/bx/n/10 Background.[][] []\OT1/cmr/m/n/10 The bi-
 cy-cle shar-ing sys-tem is a way of rent-ing bi-cy-cles. Through
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 5--6
+Underfull \hbox (badness 10000) in paragraph at lines 60--61
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 12--13
+Underfull \hbox (badness 10000) in paragraph at lines 67--68
 
  []
 
@@ -1422,7 +1422,7 @@ Package fancyhdr Warning: \footskip is too small (12.0pt):
 [3]
 File: ./figure/Figure_4.eps Graphic file (type eps)
  <./figure/Figure_4.eps>
-Overfull \hbox (2.35374pt too wide) in paragraph at lines 71--72
+Overfull \hbox (2.35374pt too wide) in paragraph at lines 126--127
  [][][] 
  []
 
@@ -1432,7 +1432,7 @@ File: ./figure/Figure_6.eps Graphic file (type eps)
  <./figure/Figure_6.eps>
 File: ./figure/Figure_7.eps Graphic file (type eps)
  <./figure/Figure_7.eps>
-Overfull \hbox (3.3575pt too wide) in paragraph at lines 92--93
+Overfull \hbox (3.3575pt too wide) in paragraph at lines 147--148
  [][][] 
  []
 
@@ -1440,7 +1440,7 @@ File: ./figure/1.eps Graphic file (type eps)
 <./figure/1.eps>
 File: ./figure/2.eps Graphic file (type eps)
  <./figure/2.eps>
-Overfull \hbox (3.3575pt too wide) in paragraph at lines 106--107
+Overfull \hbox (3.3575pt too wide) in paragraph at lines 161--162
  [][][] 
  []
 
@@ -1456,7 +1456,7 @@ Package fancyhdr Warning: \footskip is too small (12.0pt):
 [4]
 File: ./figure/models_Figure_1.eps Graphic file (type eps)
  <./figure/models_Figure_1.eps>
-Underfull \hbox (badness 10000) in paragraph at lines 125--128
+Underfull \hbox (badness 10000) in paragraph at lines 180--183
 
  []
 
@@ -1467,7 +1467,7 @@ Package fancyhdr Warning: \footskip is too small (12.0pt):
 (fancyhdr)                Make it at least 14.79996pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.79996pt}.
 
-[5])
+[5]
 File: logos/tulip-logo.eps Graphic file (type eps)
  <logos/tulip-logo.eps>
 
@@ -1475,13 +1475,10 @@ Package fancyhdr Warning: \footskip is too small (12.0pt):
 (fancyhdr)                Make it at least 14.79996pt, for example:
 (fancyhdr)                \setlength{\footskip}{14.79996pt}.
 
-[6] (./report.bbl
-
-Package natbib Warning: Empty `thebibliography' environment on input line 8.
-
-)
+[6]
+No file report.bbl.
 File: logos/tulip-logo.eps Graphic file (type eps)
- <logos/tulip-logo.eps>
+<logos/tulip-logo.eps>
 
 Package fancyhdr Warning: \footskip is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.79996pt, for example:
@@ -1491,15 +1488,15 @@ Package fancyhdr Warning: \footskip is too small (12.0pt):
 No complaints by nag.
 (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: BCE709BE52A49972C72AF48DBE29A397;2721.
+(rerunfilecheck)             Checksum: 4A21A2E09EEBDDF9E228F203E87E08F3;2625.
  ) 
 Here is how much of TeX's memory you used:
- 35729 strings out of 478995
- 692385 string characters out of 5862233
- 1191694 words of memory out of 5000000
- 52373 multiletter control sequences out of 15000+600000
+ 35718 strings out of 478995
+ 692263 string characters out of 5862233
+ 1191562 words of memory out of 5000000
+ 52369 multiletter control sequences out of 15000+600000
  411421 words of font info for 59 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 133i,12n,134p,155335b,775s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 133i,12n,134p,155318b,775s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.dvi (7 pages, 52596 bytes).
+Output written on report.dvi (7 pages, 52020 bytes).
