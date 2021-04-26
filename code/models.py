@@ -65,6 +65,7 @@ yLablesCasual = dataTrain["casual"]
 dataTrain = dataTrain.drop(dropFeatures, axis=1)
 dataTest = dataTest.drop(dropFeatures, axis=1)
 
+
 # RMSLE Scorer
 def rmsle(y, y_, convertExp=True):
     if convertExp:
@@ -75,7 +76,7 @@ def rmsle(y, y_, convertExp=True):
     calc = (log1 - log2) ** 2
     return np.sqrt(np.mean(calc))
 
-
+#follow is some model
 '''
 # Linear Regression Model-----------------------------------------------------*
 pd.options.mode.chained_assignment = None
@@ -167,9 +168,8 @@ plt.show()
 
 # ***************************************************************************************
 submission = pd.DataFrame({
-        "datetime": datetimecol,
-        "count": [max(0, x) for x in np.exp(predsTest)]
-    })
+    "datetime": datetimecol,
+    "count": [max(0, x) for x in np.exp(predsTest)]
+})
 submission.to_csv('bike_predictions_gbm_separate_without_fe.csv', index=False)
 # ***************************************************************************************
-

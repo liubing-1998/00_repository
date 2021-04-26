@@ -19,7 +19,7 @@ dailyData_test = pd.read_csv("C:/Users/15467/Desktop/00_repository/data/test.csv
 # shape of the dataset
 print(dailyData.shape)
 print(dailyData_test.shape)
-# sys.exit()
+
 
 # sample of first few rows
 # print(dailyData.head(2))
