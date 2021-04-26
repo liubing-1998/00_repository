@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=latex 2021.4.17)  23 APR 2021 10:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=latex 2021.4.17)  26 APR 2021 11:16
 entering extended mode
  restricted \write18 enabled.
  Source specials enabled.
@@ -1382,7 +1382,26 @@ Package microtype Info: Loading generic protrusion settings for font family
 \tf@toc=\write7
 \openout7 = `report.toc'.
 
- [1] (./mainbody.tex)
+ [1] (./mainbody.tex
+Overfull \hbox (3.22005pt too wide) in paragraph at lines 5--6
+ \OT1/cmr/m/n/10 1.1.\OT1/cmr/bx/n/10 Background.[][] []\OT1/cmr/m/n/10 The bi-
+cy-cle shar-ing sys-tem is a way of rent-ing bi-cy-cles. Through
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
+
+ []
+
+File: ./figure/Figure_1.eps Graphic file (type eps)
+<./figure/Figure_1.eps>
+File: ./figure/Figure_2.eps Graphic file (type eps)
+ <./figure/Figure_2.eps>
 File: logos/tulip-logo.eps Graphic file (type eps)
  <logos/tulip-logo.eps>
 
@@ -1391,11 +1410,8 @@ Package fancyhdr Warning: \footskip is too small (12.0pt):
 (fancyhdr)                \setlength{\footskip}{14.79996pt}.
 
 [2]
-No file report.bbl.
-(./report.tdo)
-\tf@tdo=\write8
-\openout8 = `report.tdo'.
-
+File: ./figure/Figure_3.eps Graphic file (type eps)
+ <./figure/Figure_3.eps>
 File: logos/tulip-logo.eps Graphic file (type eps)
  <logos/tulip-logo.eps>
 
@@ -1404,24 +1420,94 @@ Package fancyhdr Warning: \footskip is too small (12.0pt):
 (fancyhdr)                \setlength{\footskip}{14.79996pt}.
 
 [3]
+File: ./figure/Figure_4.eps Graphic file (type eps)
+ <./figure/Figure_4.eps>
+Overfull \hbox (2.35374pt too wide) in paragraph at lines 71--72
+ [][][] 
+ []
+
+File: ./figure/Figure_5.eps Graphic file (type eps)
+<./figure/Figure_5.eps>
+File: ./figure/Figure_6.eps Graphic file (type eps)
+ <./figure/Figure_6.eps>
+File: ./figure/Figure_7.eps Graphic file (type eps)
+ <./figure/Figure_7.eps>
+Overfull \hbox (3.3575pt too wide) in paragraph at lines 93--94
+ [][][] 
+ []
+
+File: ./figure/1.eps Graphic file (type eps)
+<./figure/1.eps>
+File: ./figure/2.eps Graphic file (type eps)
+ <./figure/2.eps>
+Overfull \hbox (3.3575pt too wide) in paragraph at lines 107--108
+ [][][] 
+ []
+
+File: logos/tulip-logo.eps Graphic file (type eps)
+<logos/tulip-logo.eps>
+
+Package fancyhdr Warning: \footskip is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.79996pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.79996pt}.
+
+[4]
+File: ./figure/3.eps Graphic file (type eps)
+ <./figure/3.eps>
+File: ./figure/models_Figure_1.eps Graphic file (type eps)
+ <./figure/models_Figure_1.eps>
+Underfull \hbox (badness 10000) in paragraph at lines 126--129
+
+ []
+
+File: logos/tulip-logo.eps Graphic file (type eps)
+<logos/tulip-logo.eps>
+
+Package fancyhdr Warning: \footskip is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.79996pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.79996pt}.
+
+[5])
+File: logos/tulip-logo.eps Graphic file (type eps)
+ <logos/tulip-logo.eps>
+
+Package fancyhdr Warning: \footskip is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.79996pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.79996pt}.
+
+[6]
+File: logos/tulip-logo.eps Graphic file (type eps)
+ <logos/tulip-logo.eps>
+
+Package fancyhdr Warning: \footskip is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.79996pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.79996pt}.
+
+[7] (./report.bbl
+
+Package natbib Warning: Empty `thebibliography' environment on input line 8.
+
+)
+File: logos/tulip-logo.eps Graphic file (type eps)
+ <logos/tulip-logo.eps>
+
+Package fancyhdr Warning: \footskip is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.79996pt, for example:
+(fancyhdr)                \setlength{\footskip}{14.79996pt}.
+
+[8]
 No complaints by nag.
 (./report.aux)
-
-Package rerunfilecheck Warning: File `report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: F590B7DB5AB00107419C1A43D4E16C1B;755
-(rerunfilecheck)             After:  4D4994D25C0EB1EFDA75568B8887794B;870.
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: BCE709BE52A49972C72AF48DBE29A397;2721.
  ) 
 Here is how much of TeX's memory you used:
- 35673 strings out of 478995
- 691247 string characters out of 5862233
- 1182473 words of memory out of 5000000
- 52328 multiletter control sequences out of 15000+600000
+ 35729 strings out of 478995
+ 692385 string characters out of 5862233
+ 1191696 words of memory out of 5000000
+ 52373 multiletter control sequences out of 15000+600000
  411421 words of font info for 59 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 133i,12n,134p,438b,771s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 133i,13n,134p,155335b,775s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.dvi (3 pages, 30892 bytes).
+Output written on report.dvi (8 pages, 53376 bytes).
