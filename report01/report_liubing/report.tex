@@ -1,0 +1,172 @@
+\documentclass{amsart}
+\synctex=1
+
+%=================================================================
+% 
+\newcount\DraftStatus  % 0 suppresses notes to selves in text
+\DraftStatus=1   % TODO: set to 0 for final version
+%=================================================================
+
+%=================================================================
+\usepackage{comment}
+%=================================================================
+%
+\includecomment{JournalOnly}  
+\includecomment{ConferenceOnly}  
+\includecomment{TulipStyle}
+%
+%=================================================================
+\input{preamble}
+
+
+%=================================================================
+%
+\begin{document}
+%
+%=================================================================
+%
+\title[Report]{Report}%
+
+\author{Bing Liu}
+\address[A.~1]{School of Computer Science,\\ 
+Jilin University, ChangChun 130012, China}%
+\email[A.~1]{bliu@tulip.academy}
+
+
+%\thanks{Thanks to \ldots}%
+\subjclass{Artificial Intelligence}%
+\date{\gitAuthorDate}%
+
+%\input{abstract}
+
+\begin{abstract}
+	In this report, I will talk about my work achievement. After systematically learning Probability theory and Pattern recognition.I test the learning results by completing a classification kaggle question. The following is a detailed introduction about the kaggle competition of what's cooking.
+\end{abstract}
+
+\keywords{Pattern recognition, NLP, python}%
+
+\maketitle
+\tableofcontents
+
+\newpage
+%=================================================================
+
+%\input{mainbody}
+%=================================================================
+\section{Introduction}\label{sec-intro}
+
+\subsection{Background}
+If you're in Northern California, you'll be walking past the inevitable bushels of leafy greens, spiked with dark purple kale and the bright pinks and yellows of chard. Across the world in South Korea, mounds of bright red kimchi greet you, while the smell of the sea draws your attention to squids squirming nearby. India’s market is perhaps the most colorful, awash in the rich hues and aromas of dozens of spices: turmeric, star anise, poppy seeds, and garam masala as far as the eye can see.\\
+
+\subsection{Target}
+Some of our strongest geographic and cultural associations are tied to a region's local foods. This playground competitions asks to predict the category of a dish's cuisine given a list of its ingredients. 
+
+\section{Data} \label{sec-preliminaries}
+\subsection{Data Description}
+In the dataset, it include the recipe id, the type of cuisine, and the list of ingredients of each recipe (of variable length). The data is stored in JSON format.\\
+
+In the test file test.json, the format of a recipe is the same as train.json, only the cuisine type is removed, as it is the target variable you are going to predict.\\
+
+\begin{itemize}
+	\smallskip
+	\item \textbf{train.json} -- the training set containing recipes id, type of cuisine, and list of ingredients. It contains 39774 entries.
+	\smallskip
+	\item \textbf{test.json} -- the test set containing recipes id, and list of ingredients. It contains 9944 entries.
+	\item \textbf{sampleSubmission.csv} -- a sample submission file in the correct format. It just contains 2 columns that is "id" and "cuisine".
+\end{itemize}
+
+
+\subsection{Missing Values Analysis}
+I statistic missing value in the dataset, Luckily the dataset do not has any missing value.\\
+\begin{figure}[htbp]
+	\includegraphics[scale=1]{./figure1/1.eps}
+	\caption{Missing values analysis}
+\end{figure}
+
+\subsection{Statistic Cuisine}
+There are a total of 20 types of cuisines, and the percentage of each type of cuisine is as follows. 
+ 
+\begin{figure}[htbp]
+	\includegraphics[scale=0.38]{./figure1/2.eps}
+	\caption{Statistic Cuisine}
+\end{figure}
+
+\subsection{Word Frequency Statistics}
+Count the number of occurrences of each word in the entire dataset ‘ingredients’, In order to analyze the importance of related vocabulary. 
+
+\begin{figure}[htbp]
+	\includegraphics[scale=0.4]{./figure1/3.eps}
+	\caption{Word frequency statistics of entire dataset}
+\end{figure}
+
+Count the number of ‘ingredients’ per cuisine. There are twenty cuisine in the train data, just show the 'Greek' word frequency statistics. Just Visualize the 25 most commonly used ingredients.
+
+\begin{figure}[htbp]
+	\includegraphics[scale=0.4]{./figure1/4.eps}
+	\caption{Greek word frequency statistics}
+\end{figure}
+
+\subsection{String Preprocess}
+1:Use the WordNetLemmatizer().lemmatize() method to restore the part of speech\\
+2:remove the useless suffix of the word\\
+3:remove the non-letter symbols\\
+4:change the uppercase letters to lowercase
+\begin{figure}[htbp]
+	\includegraphics[scale=0.5]{./figure1/5.eps}
+	\caption{String preprocess}
+\end{figure}
+
+
+\section{Feature Engineering} \label{sec-method}
+\subsection{Count Vectorizer}
+	Convert a document into a vector by counting to complete feature extraction, which get a word frequency matrix.
+
+\begin{figure}[htbp]
+	\includegraphics[scale=0.8]{./figure1/6.eps}
+	\caption{code of count vectorizer}
+\end{figure}
+
+\subsection{TFiDF Vectorizer}
+Input the word frequency matrix to get the TF-IDF weight matrix.
+\begin{figure}[htbp]
+	\includegraphics[scale=0.5]{./figure1/7.eps}
+	\caption{code of TFiDF vectorizer}
+\end{figure}
+
+\subsection{Cluster as Parameter}
+There are 20 different types of cuisine to classify. Certain groups of cuisine may have much more similarity than others. So we use the clustering information as part of the feature.\\
+
+The "cuisine\_df" is also used to generate the weight matrix through the TFiDF Vectorizer. Use PCA to reduce dimensionality.\\
+
+Predict clusters in the test data, encoded as Onehot vectors.\\
+
+Combine the TFIDF vector and the cluster vector as a feature vector.
+
+\section{Model And Conclusion} \label{sec-conclusions}
+I have choose the SVC as classification model.
+\begin{figure}[htbp]
+	\includegraphics[scale=0.7]{./figure1/8.eps}
+	\caption{SVC}
+\end{figure}
+The percentage of the number of correctly classified cuisines in the total number is used as the accuracy rate.\\
+My accuracy rate is 81.06\%
+
+%\section*{Acknowledgement}
+
+%\lipsum[1]
+
+
+%The authors would like to thank \ldots
+
+
+% ----------------------------------------------------------------
+\newpage
+\bibliography{tuliplab,yourbib}
+% TODO: you should change this yourbib into a proper bib file name
+\bibliographystyle{plainnat}
+%=================================================================
+
+%\listoftodos
+
+\end{document}
+

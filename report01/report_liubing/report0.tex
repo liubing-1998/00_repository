@@ -1,0 +1,205 @@
+\documentclass{amsart}
+\synctex=1
+
+%=================================================================
+% 
+\newcount\DraftStatus  % 0 suppresses notes to selves in text
+\DraftStatus=1   % TODO: set to 0 for final version
+%=================================================================
+
+%=================================================================
+\usepackage{comment}
+%=================================================================
+%
+\includecomment{JournalOnly}  
+\includecomment{ConferenceOnly}  
+\includecomment{TulipStyle}
+%
+%=================================================================
+\input{preamble}
+
+
+%=================================================================
+%
+\begin{document}
+%
+%=================================================================
+%
+\title[Report]{Report}%
+
+\author{Bing Liu}
+\address[A.~1]{School of Computer Science,\\ 
+Jilin University, ChangChun 130012, China}%
+\email[A.~1]{bliu@tulip.academy}
+
+
+%\thanks{Thanks to \ldots}%
+\subjclass{Artificial Intelligence}%
+\date{\gitAuthorDate}%
+
+%\input{abstract}
+
+\begin{abstract}
+	In this report, I will talk about my work. After learning latex and Git, mastering its basic operations, and at the same time completing python learning, and I test myself by completing a predictive kaggle question. The following is a detailed introduction about the kaggle competition.
+\end{abstract}
+
+\keywords{Machine Learning, Data Mining, python, latex, git}%
+
+
+\maketitle
+\tableofcontents
+
+\newpage
+%=================================================================
+
+%\input{mainbody}
+%=================================================================
+\section{Introduction}\label{sec-intro}
+
+\subsection{Background}
+The bicycle sharing system is a way of renting bicycles. Through the network of kiosk locations throughout the city, membership is automatically obtained, and the process of renting and returning bicycles. Using these systems, people can rent a bicycle from one place and return it to other places as needed. Currently, there are more than 500 bike sharing programs worldwide.\\
+
+\subsection{Target}
+In this competition, participants are asked to combine historical usage patterns with weather data in order to forecast bike rental demand in the Capital Bikeshare program in Washington, D.C.
+
+\section{Data} \label{sec-preliminaries}
+\subsection{Data Description}
+The competition provide hourly rental data spanning two years.the training set is comprised of the first 19 days of each month, while the test set is the 20th to the end of the month. The taskis to predict the total count of bikes rented during each hour covered by the test set, using only information available prior to the rental period.\\
+
+\begin{itemize}
+	\smallskip
+	\item \textbf{train.csv} -- it contains 10886 rows and 12 columns. Each row represents bike rental data for a certain hour. Each column indicates the current conditions
+	\smallskip
+	\item \textbf{test.csv} -- it contains 6493 rows and 9 columns. Compared with the train data, there are fewer "casual","registered" and "count" columns.
+	\smallskip
+	\item \textbf{sampleSubmission.csv} -- it clarifies the data submission format. It just contains 2 columns that is "datetime" and "count".
+\end{itemize}
+
+\subsection{Data Fields}
+The following is a detailed introduction of the data.\\
+\begin{tabular}{c| c c c c }
+	\toprule
+	\textbf{column} & \textbf{description}  \\
+	\midrule
+	$datetime$ &  {hourly date + timestamp }\\
+	$season$ &  {1 = spring, 2 = summer, 3 = fall, 4 = winter} \\
+	$holiday$ &  {whether the day is considered a holiday} \\
+	$workingday$ &  {whether the day is neither a weekend nor holiday} \\
+	$weather$ &  {1=clear, 2=mist + cloudy, 3=light snow, 4=heavy rain} \\
+	$temp$ & {temperature in Celsius} \\
+	$atemp$ & {"feels like" temperature in Celsius} \\
+	$humidity$ & {relative humidity} \\
+	$windspeed$ & {wind speed} \\
+	$casual$ & {number of non-registered user rentals initiated} \\
+	$registered$ & {number of registered user rentals initiated} \\
+	$count$ & {number of total rentals} \\
+	\bottomrule
+\end{tabular}
+
+\subsection{Missing Values Analysis}
+I use "missingno" to look missing value in the dataset, Luckily the dataset do has any missing value.\\
+\begin{figure}[htbp]
+	\includegraphics[scale=0.3]{./figure/Figure_1.eps}
+	\caption{Missing values analysis}
+\end{figure}
+
+\subsection{Outliers Analysis}
+1:Spring season has got relatively lower count. \\
+2:The boxplot with "Hour Of The Day" is quiet interesting.The median value are relatively higher at 7AM to 8AM and 5PM to 6PM.\\
+3:Most of the outlier points are mainly contributed from "Working Day" than "Non Working Day". 
+\begin{figure}[htbp]
+	\includegraphics[scale=0.4]{./figure/Figure_2.eps}
+	\caption{Outliers analysis}
+\end{figure}
+
+\subsection{Correlation Analysis}
+1:temp and humidity features has got positive and negative correlation with count respectively. the count variable has got little dependency on "temp" and "humidity". \\
+2:"Casual" and "Registered" are also not taken into account since they are leakage variables in nature and need to dropped during model building. \\
+3:windspeed is not gonna be really useful numerical feature.
+\begin{figure}[htbp]
+	\includegraphics[scale=0.5]{./figure/Figure_3.eps}
+	\caption{Correlation Analysis I}
+\end{figure}
+
+Regression plot in seaborn is one useful way to depict the relationship between two features. Here we consider "count" vs "temp", "humidity", "windspeed".
+\begin{figure}[htbp]
+	\includegraphics[scale=0.5]{./figure/Figure_4.eps}
+	\caption{Correlation Analysis II}
+\end{figure}
+
+\subsection{Visualizing Distribution Of Data}
+It is desirable to have Normal distribution deeplearning require dependent variable to be Normal. One possible solution is to take log transformation on "count" variable after removing outlier data points.
+\begin{figure}[htbp]
+	\includegraphics[scale=0.3]{./figure/Figure_5.eps}
+	\caption{Visualizing Distribution Of Data}
+\end{figure}
+
+\subsection{Visualizing Count}
+1:It is quiet obvious that people tend to rent bike during summer season. Therefore June, July and August has got relatively higher demand for bicycle.\\
+2:On weekdays more people tend to rent bicycle around 7AM-8AM and 5PM-6PM. 
+\begin{figure}[htbp]
+	\includegraphics[scale=0.3]{./figure/Figure_6.eps}
+	\caption{Visualizing Count I}
+\end{figure}
+3:On "Saturday" and "Sunday".More people tend to rent bicycle between 10AM and 4PM.\\
+4:Registered user contribute the peak around 7AM-8AM and 5PM-6PM.
+\begin{figure}[htbp]
+	\includegraphics[scale=0.5]{./figure/Figure_7.eps}
+	\caption{Visualizing Count II}
+\end{figure}
+
+
+\section{Feature Engineering and Model} \label{sec-method}
+\subsection{Feature Processing}
+Split the given date into "date, hour, year, weekday, month".
+\begin{figure}[htbp]
+	\includegraphics[scale=0.5]{./figure/1.eps}
+	\caption{Time feature processing}
+\end{figure}
+According to visual analysis, select features that have strong correlation with count.
+\begin{figure}[htbp]
+	\includegraphics[scale=0.5]{./figure/2.eps}
+	\caption{Feature selection}
+\end{figure}
+
+\subsection{Splitting train and test date}
+Divide train set and test set according to whether there is count attribute.
+\begin{figure}[htbp]
+	\includegraphics[scale=0.6]{./figure/3.eps}
+	\caption{Training set and test set division}
+\end{figure}
+
+\subsection{Model}
+I have choose the Ensemble Model - Gradient Boost. Compare the distribution of train and test results.It confirms visually that the model has not predicted really bad and do not have overfitting problem.
+\begin{figure}[htbp]
+	\includegraphics[scale=0.4]{./figure/models_Figure_1.eps}
+	\caption{Distribution of train and test results}
+\end{figure}
+
+\section{Conclusions} \label{sec-conclusions}
+Using RMSLE to calculate the error, it penalizes under-prediction even more.\\
+RMSLE Value For Gradient Boost:  0.189973542608\\
+The score of my submission in kaggle is 0.41867. Ranked 428 among 3242 teams.\\
+
+As the result shows the model can effectively predict the count demand of bike. By solving this prediction problem, I am more familiar with python visualization and have a guiding idea for the data processing process. The learning task of the first stage was completed well.
+
+
+%\section*{Acknowledgement}
+
+%\lipsum[1]
+
+
+%The authors would like to thank \ldots
+
+
+% ----------------------------------------------------------------
+\newpage
+\bibliography{tuliplab,yourbib}
+% TODO: you should change this yourbib into a proper bib file name
+\bibliographystyle{plainnat}
+%=================================================================
+
+%\listoftodos
+
+\end{document}
+
